@@ -4,8 +4,8 @@ class listController: UITableViewController {
     @IBOutlet weak var table: UITableView!
     
     var watchlist: [Film] = [
-        Film(title: "Star Wars", description: "This is not the description you're looking for"),
-        Film(title: "Lord of the Rings", description: "and my axe,... i mean description")
+        Film(title: "Star Wars", description: "This is not the description you're looking for", score: 9, userScore: 10),
+        Film(title: "Lord of the Rings", description: "and my axe,... i mean description", score: 10, userScore: 9)
     ]
     
     override func viewDidAppear(animated: Bool) {
@@ -22,7 +22,7 @@ class listController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 100
+        return 120
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -33,5 +33,14 @@ class listController: UITableViewController {
         cell.descriptionLabel?.text = film.description
         
         return cell
+    }
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "showDetailsSegue") {
+            if let destinationVC = segue.destinationViewController as? filmController {
+                destinationVC.film = watchlist[(self.tableView.indexPathForSelectedRow?.row)!]
+            }
+        }
     }
 }
