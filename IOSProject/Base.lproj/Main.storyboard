@@ -194,13 +194,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="PpK-A6-opf">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="OWx-fa-0PJ">
                             <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
-                            <connections>
-                                <outlet property="delegate" destination="XYp-Ww-llT" id="87F-pc-Ixe"/>
-                            </connections>
                         </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="filmCell" rowHeight="100" id="jHJ-wb-gx6" customClass="FilmTableViewCell" customModule="IOSProject" customModuleProvider="target">
@@ -258,20 +255,11 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <outlet property="searchDisplayController" destination="U6l-mZ-E9w" id="ZV8-PY-57c"/>
+                        <outlet property="searchBar" destination="OWx-fa-0PJ" id="ESn-MX-2Xy"/>
                         <outlet property="table" destination="Qxp-zT-UVJ" id="wNu-XR-eyd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="amV-Fp-wmX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="U6l-mZ-E9w">
-                    <connections>
-                        <outlet property="delegate" destination="XYp-Ww-llT" id="UaZ-ti-1H9"/>
-                        <outlet property="searchBar" destination="PpK-A6-opf" id="QfM-vX-96r"/>
-                        <outlet property="searchContentsController" destination="XYp-Ww-llT" id="vNY-HT-Gc4"/>
-                        <outlet property="searchResultsDataSource" destination="XYp-Ww-llT" id="SjW-vr-U3L"/>
-                        <outlet property="searchResultsDelegate" destination="XYp-Ww-llT" id="Pqz-UC-2rc"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="2633" y="117"/>
         </scene>
