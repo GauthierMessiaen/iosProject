@@ -1,9 +1,8 @@
 import Foundation
 import UIKit
 
-class addFilmController: UITableViewController, UISearchBarDelegate {
+class addFilmController: UITableViewController, UISearchResultsUpdating {
     @IBOutlet weak var table: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var completeList = [
         Film(title: "Star Wars", description: "This is not the description you're looking for", score: 9, userScore: 10),
@@ -13,35 +12,24 @@ class addFilmController: UITableViewController, UISearchBarDelegate {
     
     var searchActive = false
     var filteredData : [Film] = []
-    var resultSearchController = UISearchController()
+    var searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchBar.delegate = self
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
     }
-    
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true;
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false;
-    }
+
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searchActive {
+        if searchController.active && searchController.searchBar.text != "" {
             return filteredData.count
         } else {
             return completeList.count
@@ -53,9 +41,9 @@ class addFilmController: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("filmCell") as! FilmTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("filmCell", forIndexPath: indexPath) as! FilmTableViewCell
         
-        if searchActive {
+        if searchController.active && searchController.searchBar.text != "" {
             cell.titleLabel?.text = filteredData[indexPath.row].title
             cell.descriptionLabel?.text = filteredData[indexPath.row].description
         } else {
@@ -66,20 +54,14 @@ class addFilmController: UITableViewController, UISearchBarDelegate {
         return cell
     }
     
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        filteredData = completeList.filter({ (text) -> Bool in
-            let tmp: NSString = text.title
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
-        if(filteredData.count == 0){
-            searchActive = false;
-        } else {
-            searchActive = true;
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filteredData = completeList.filter { film in
+            let title = film.title.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
+            let description = film.description.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
+            return(title || description)
         }
-        self.tableView.reloadData()
+        
+        tableView.reloadData()
     }
     
 }
