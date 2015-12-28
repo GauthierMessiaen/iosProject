@@ -8,8 +8,6 @@ class filmController: UIViewController {
     @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    var addedToWatchlist = false
-    
     var film: Film!
     
     override func viewDidLoad() {
@@ -20,7 +18,7 @@ class filmController: UIViewController {
         filmImageView.setImages(film.imageUrl, defaultImg: nil)
     }
     
-    @IBAction func AddToList() {
-        addedToWatchlist = true
+    @IBAction func addToList() {
+        
     }
 }

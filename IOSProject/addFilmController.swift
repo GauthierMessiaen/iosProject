@@ -90,8 +90,6 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    @IBAction func unwindFromFilm(segue: UIStoryboardSegue) {
-        //Add film to watchlist and return to watchlistView
-    }
+    
     
 }

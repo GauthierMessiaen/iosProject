@@ -42,4 +42,20 @@ class listController: UITableViewController {
             }
         }
     }
+    
+    @IBAction func unwindFromFilm(segue: UIStoryboardSegue) {
+        let filmView: filmController = segue.sourceViewController as! filmController
+//        if alreadyInList(film) {
+//            watchlist.append(filmView.film)
+//        } else {
+//          message -> item already in list
+//        }
+    
+        watchlist.append(filmView.film)
+        self.tableView.reloadData()
+    }
+    
+//    func alreadyInList(film: Film) -> Bool {
+//        return find(watchlist, film)
+//    }
 }
