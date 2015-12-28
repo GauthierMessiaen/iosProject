@@ -20,6 +20,7 @@
 		36E08AA61C25BF4300591E45 /* addFilmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E08AA51C25BF4300591E45 /* addFilmController.swift */; };
 		36EB279E1C31405A0022AE16 /* AllFilmsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EB279D1C31405A0022AE16 /* AllFilmsTableViewCell.swift */; };
 		36EB27A01C3178CB0022AE16 /* watchedFilmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36EB279F1C3178CB0022AE16 /* watchedFilmController.swift */; };
+		36EB27C71C31A3B90022AE16 /* IOSProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 36EB27C51C31A3B90022AE16 /* IOSProject.xcdatamodeld */; };
 		36FF47A81C21B14400A7E27A /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FF47A71C21B14400A7E27A /* Film.swift */; };
 		36FF47AE1C21D02400A7E27A /* FilmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36FF47AD1C21D02400A7E27A /* FilmTableViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		36E08AA51C25BF4300591E45 /* addFilmController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addFilmController.swift; sourceTree = "<group>"; };
 		36EB279D1C31405A0022AE16 /* AllFilmsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllFilmsTableViewCell.swift; sourceTree = "<group>"; };
 		36EB279F1C3178CB0022AE16 /* watchedFilmController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = watchedFilmController.swift; sourceTree = "<group>"; };
+		36EB27C61C31A3B90022AE16 /* IOSProject.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IOSProject.xcdatamodel; sourceTree = "<group>"; };
 		36FF47A71C21B14400A7E27A /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		36FF47AD1C21D02400A7E27A /* FilmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +96,7 @@
 				36C303B01C13324B0002D4B0 /* Assets.xcassets */,
 				36C303B21C13324B0002D4B0 /* LaunchScreen.storyboard */,
 				36C303B51C13324B0002D4B0 /* Info.plist */,
+				36EB27C51C31A3B90022AE16 /* IOSProject.xcdatamodeld */,
 			);
 			path = IOSProject;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36DDD4551C3071C400E4A353 /* URLUIImageView.swift in Sources */,
+				36EB27C71C31A3B90022AE16 /* IOSProject.xcdatamodeld in Sources */,
 				36C303AA1C13324B0002D4B0 /* AppDelegate.swift in Sources */,
 				36EB27A01C3178CB0022AE16 /* watchedFilmController.swift in Sources */,
 				36FF47AE1C21D02400A7E27A /* FilmTableViewCell.swift in Sources */,
@@ -376,6 +380,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		36EB27C51C31A3B90022AE16 /* IOSProject.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				36EB27C61C31A3B90022AE16 /* IOSProject.xcdatamodel */,
+			);
+			currentVersion = 36EB27C61C31A3B90022AE16 /* IOSProject.xcdatamodel */;
+			path = IOSProject.xcdatamodeld;
+			sourceTree = SOURCE_ROOT;
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 36C3039E1C13324B0002D4B0 /* Project object */;
 }

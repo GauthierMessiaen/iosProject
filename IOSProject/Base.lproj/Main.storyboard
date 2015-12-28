@@ -330,7 +330,7 @@
                                 <rect key="frame" x="233" y="191" width="69" height="30"/>
                                 <state key="normal" title="Add to list"/>
                                 <connections>
-                                    <action selector="AddToList" destination="YYn-6a-6Pj" eventType="touchUpInside" id="Ohd-iY-5gu"/>
+                                    <action selector="addToList" destination="YYn-6a-6Pj" eventType="touchUpInside" id="o6U-S3-Cdk"/>
                                     <segue destination="ViO-eh-KeG" kind="unwind" identifier="addToWatchlist" unwindAction="unwindFromFilm:" id="yGv-Cb-bF8"/>
                                 </connections>
                             </button>
