@@ -15,7 +15,7 @@ class filmController: UIViewController {
         title = film.title
         titleLabel.text = film.title
         scoreLabel.text = film.scoreToStars(film.score)
-        yourScoreLabel.text = film.scoreToStars(film.userScore)
+        yourScoreLabel.text = film.scoreToStars(film.userScore!)
         descriptionLabel.text = film.description
     }
     

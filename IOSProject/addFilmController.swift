@@ -13,8 +13,7 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
     var searchActive = false
     var filteredData : [Film] = []
     var searchController = UISearchController(searchResultsController: nil)
-    
-    var api: APIController = APIController()
+
     
     
     override func viewDidLoad() {
@@ -25,7 +24,11 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
         searchController.searchBar.sizeToFit()
         tableView.tableHeaderView = searchController.searchBar
         
-        api.GetAPIResultsAsync("http://api.themoviedb.org/3/search/movie?api_key=860d7a52308bfdd68825f10b030d9430&query=star")
+        
+    }
+    
+    func loadMovies(data : Array<Film>) {
+        
     }
 
     

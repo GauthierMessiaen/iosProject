@@ -11,6 +11,26 @@ class listController: UITableViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+        
+        TMDBApiClient.instance.searchMovie("star", success: loadMovies)
+    }
+    
+    func loadMovies(data: NSData){
+        print("callback called")
+        if let jsonMovies: NSDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)) as? NSDictionary{            print(jsonMovies["page"])
+            if let results = jsonMovies["results"] as? NSArray{
+                
+                var movies: [Film] = []
+                
+                for movie in results{
+                    movies.append(Film(json: movie as! NSDictionary))
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.watchlist = movies
+                    self.tableView.reloadData()
+                })
+            }
+        }
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -31,7 +51,7 @@ class listController: UITableViewController {
         
         cell.titleLabel?.text = film.title
         cell.descriptionLabel?.text = film.description
-        
+        cell.filmImageView.setImages(film.imageUrl, defaultImg: nil)
         return cell
     }
     
