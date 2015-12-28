@@ -1,16 +1,15 @@
 import UIKit
 
+
 class listController: UITableViewController {
     @IBOutlet weak var table: UITableView!
     
-    var watchlist: [Film] = [
-        Film(title: "Star Wars", description: "This is not the description you're looking for", score: 9, userScore: 10),
-        Film(title: "Lord of the Rings", description: "and my axe,... i mean description", score: 10, userScore: 9)
-    ]
+    var watchlist: [Film] = []
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+        self.tableView.reloadData()
+        
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -31,7 +30,7 @@ class listController: UITableViewController {
         
         cell.titleLabel?.text = film.title
         cell.descriptionLabel?.text = film.description
-        
+        cell.filmImageView.setImages(film.imageUrl, defaultImg: nil)
         return cell
     }
     

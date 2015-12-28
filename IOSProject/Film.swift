@@ -2,17 +2,18 @@ import Foundation
 import UIKit
 
 struct Film {
-    let title: String
-    let description: String
-    let score: Int
-    let userScore: Int
-    //let image: UIImage
+    var title: String
+    var description: String
+    var score: Int
+    var userScore: Int? = nil
+    var imageUrl: String? = nil
     
-    init(title: String, description: String, score: Int, userScore: Int/*, image: UIImage*/){
-        self.title = title
-        self.description = description
-        self.score = score
-        self.userScore = userScore
+    init(json: NSDictionary){
+        self.title = json["title"] as! String
+        self.description = json["overview"] as! String
+        self.score = json["vote_average"] as! Int
+        self.userScore = 0
+        self.imageUrl = "http://image.tmdb.org/t/p/w300\(json["poster_path"]!)"
     }
     
     func scoreToStars(score: Int) -> String{

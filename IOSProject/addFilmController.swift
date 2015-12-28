@@ -4,17 +4,11 @@ import UIKit
 class addFilmController: UITableViewController, UISearchResultsUpdating {
     @IBOutlet weak var table: UITableView!
     
-    var completeList = [
-        Film(title: "Star Wars", description: "This is not the description you're looking for", score: 9, userScore: 10),
-        Film(title: "Lord of the Rings", description: "and my axe,... i mean description", score: 10, userScore: 9),
-        Film(title: "The worst movie", description: "yep, the wrst movie there is", score: 1, userScore: 3)
-    ]
-    
-    var searchActive = false
+    var completeList : [Film] = []
     var filteredData : [Film] = []
+    var searchActive = false
     var searchController = UISearchController(searchResultsController: nil)
     
-    var api: APIController = APIController()
     
     
     override func viewDidLoad() {
@@ -23,9 +17,32 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
         searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         searchController.searchBar.sizeToFit()
-        tableView.tableHeaderView = searchController.searchBar
+        self.tableView.tableHeaderView = searchController.searchBar
         
-        api.GetAPIResultsAsync("http://api.themoviedb.org/3/search/movie?api_key=860d7a52308bfdd68825f10b030d9430&query=star")
+        self.tableView.reloadData()
+        TMDBApiClient.instance.searchMovie("",type: "discover" ,success: loadMovies)
+    }
+    
+    func loadMovies(data: NSData){
+        if let jsonMovies: NSDictionary = (try? NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers)) as? NSDictionary{
+            if let results = jsonMovies["results"] as? NSArray{
+                
+                var movies: [Film] = []
+                
+                for movie in results{
+                    movies.append(Film(json: movie as! NSDictionary))
+                }
+                dispatch_async(dispatch_get_main_queue(), {
+                    if self.searchController.active && self.searchController.searchBar.text != "" {
+                        self.filteredData = movies
+                    } else {
+                        self.completeList = movies
+                    }
+                    
+                    self.tableView.reloadData()
+                })
+            }
+        }
     }
 
     
@@ -46,27 +63,35 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("filmCell", forIndexPath: indexPath) as! FilmTableViewCell
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("filmCell", forIndexPath: indexPath) as! AllFilmsTableViewCell
+        let film : Film!
         if searchController.active && searchController.searchBar.text != "" {
-            cell.titleLabel?.text = filteredData[indexPath.row].title
-            cell.descriptionLabel?.text = filteredData[indexPath.row].description
+            film = filteredData[indexPath.row]
         } else {
-            cell.titleLabel?.text = completeList[indexPath.row].title
-            cell.descriptionLabel?.text = completeList[indexPath.row].description
+        film = completeList[indexPath.row]
         }
+        cell.titleLabel?.text = film.title
+        cell.descriptionLabel?.text = film.description
+        cell.filmImageView.setImages(film.imageUrl, defaultImg: nil)
         
         return cell
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        filteredData = completeList.filter { film in
-            let title = film.title.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
-            let description = film.description.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
-            return(title || description)
-        }
-        
+        TMDBApiClient.instance.searchMovie(searchController.searchBar.text!.lowercaseString, type: "search" ,success: loadMovies)
         tableView.reloadData()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if(segue.identifier == "showDetailsSegue") {
+            if let destinationVC = segue.destinationViewController as? filmController {
+                destinationVC.film = completeList[(self.tableView.indexPathForSelectedRow?.row)!]
+            }
+        }
+    }
+    
+    @IBAction func unwindFromFilm(segue: UIStoryboardSegue) {
+        //Add film to watchlist and return to watchlistView
     }
     
 }
