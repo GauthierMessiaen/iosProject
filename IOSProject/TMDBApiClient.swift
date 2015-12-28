@@ -9,18 +9,23 @@ class TMDBApiClient {
         
     }
     
-    func searchMovie(query : String = "star", success: (NSData -> Void)? = nil) {
+    func searchMovie(query : String = "",type: String, success: (NSData -> Void)? = nil) {
         let data = ["query": query]
-        self.call("/search/movie", method: "GET", data: data, success: success)
+        self.call("/\(type)/movie", method: "GET", type: type, data: data, success: success)
     }
     
-    func call(request: String, method: String, data: [String : AnyObject]?, success: (NSData -> Void)?) {
+    func call(request: String, method: String, type: String, data: [String : AnyObject]?, success: (NSData -> Void)?) {
         var url = self.BASE_URL + request
         
-        if var queryData = data{
-            queryData["api_key"] = self.API_KEY
-            let dataString = queryData.stringFromHttpParameters()
-            url = "\(url)?\(dataString)"
+        
+        if type == "search" {
+            if var queryData = data{
+                queryData["api_key"] = self.API_KEY
+                let dataString = queryData.stringFromHttpParameters()
+                url = "\(url)?\(dataString)"
+            } else {
+                url = "\(url)?api_key=\(self.API_KEY)"
+            }
         } else {
             url = "\(url)?api_key=\(self.API_KEY)"
         }
@@ -34,7 +39,7 @@ class TMDBApiClient {
         NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { 
             response, data, error in
             if data == nil {
-                print("fail")
+                print("data = nil")
                 return
             }
             

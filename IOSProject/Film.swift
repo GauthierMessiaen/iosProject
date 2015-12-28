@@ -12,14 +12,8 @@ struct Film {
         self.title = json["title"] as! String
         self.description = json["overview"] as! String
         self.score = json["vote_average"] as! Int
+        self.userScore = 0
         self.imageUrl = "http://image.tmdb.org/t/p/w300\(json["poster_path"]!)"
-    }
-    
-    init(title: String, description: String, score: Int, userScore: Int?){
-        self.title = title
-        self.description = description
-        self.score = score
-        self.userScore = userScore
     }
     
     func scoreToStars(score: Int) -> String{
