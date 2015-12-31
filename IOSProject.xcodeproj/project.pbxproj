@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		363ED6621C353CE2006D2F34 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 363ED65F1C353CE2006D2F34 /* Assets */; };
+		363ED6631C353CE2006D2F34 /* YTPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 363ED6611C353CE2006D2F34 /* YTPlayerView.m */; };
+		363ED6661C353D6D006D2F34 /* YoutubeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363ED6651C353D6D006D2F34 /* YoutubeController.swift */; };
 		36747F451C21DCF80099AB2C /* FilmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36747F441C21DCF80099AB2C /* FilmController.swift */; };
 		36B010B11C342B780067382B /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B010B01C342B780067382B /* Film.swift */; };
 		36B4FBAE1C2EA8E0007F1A3F /* TMDBApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36B4FBAD1C2EA8E0007F1A3F /* TMDBApiClient.swift */; };
@@ -27,7 +30,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36747F441C21DCF80099AB2C /* FilmController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilmController.swift; sourceTree = "<group>"; };
+		363ED65F1C353CE2006D2F34 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
+		363ED6601C353CE2006D2F34 /* YTPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTPlayerView.h; sourceTree = "<group>"; };
+		363ED6611C353CE2006D2F34 /* YTPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTPlayerView.m; sourceTree = "<group>"; };
+		363ED6641C353D22006D2F34 /* IOSProject-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IOSProject-Bridging-Header.h"; sourceTree = "<group>"; };
+		363ED6651C353D6D006D2F34 /* YoutubeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeController.swift; sourceTree = "<group>"; };
+		36747F441C21DCF80099AB2C /* FilmController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilmController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		36B010B01C342B780067382B /* Film.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		36B4FBAD1C2EA8E0007F1A3F /* TMDBApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TMDBApiClient.swift; sourceTree = "<group>"; };
 		36B4FBB01C2EFC96007F1A3F /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
@@ -74,6 +82,9 @@
 			children = (
 				36C303A81C13324B0002D4B0 /* IOSProject */,
 				36C303A71C13324B0002D4B0 /* Products */,
+				363ED65F1C353CE2006D2F34 /* Assets */,
+				363ED6611C353CE2006D2F34 /* YTPlayerView.m */,
+				363ED6601C353CE2006D2F34 /* YTPlayerView.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,6 +99,7 @@
 		36C303A81C13324B0002D4B0 /* IOSProject */ = {
 			isa = PBXGroup;
 			children = (
+				363ED6641C353D22006D2F34 /* IOSProject-Bridging-Header.h */,
 				36B4FBAF1C2EFC6C007F1A3F /* Libs */,
 				36C303BE1C1332FC0002D4B0 /* Models */,
 				36C303BD1C1332F70002D4B0 /* Services */,
@@ -119,6 +131,7 @@
 				36EB279F1C3178CB0022AE16 /* WatchedFilmController.swift */,
 				36E08AA51C25BF4300591E45 /* AddFilmController.swift */,
 				36747F441C21DCF80099AB2C /* FilmController.swift */,
+				363ED6651C353D6D006D2F34 /* YoutubeController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -166,7 +179,7 @@
 		36C3039E1C13324B0002D4B0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0710;
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = "Gauthier Messiaen";
 				TargetAttributes = {
@@ -200,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				36C303B41C13324B0002D4B0 /* LaunchScreen.storyboard in Resources */,
+				363ED6621C353CE2006D2F34 /* Assets in Resources */,
 				36C303B11C13324B0002D4B0 /* Assets.xcassets in Resources */,
 				36C303AF1C13324B0002D4B0 /* Main.storyboard in Resources */,
 			);
@@ -215,11 +229,13 @@
 				36DDD4551C3071C400E4A353 /* URLUIImageView.swift in Sources */,
 				36EB27CA1C31A47D0022AE16 /* IOSProject.xcdatamodeld in Sources */,
 				36C303AA1C13324B0002D4B0 /* AppDelegate.swift in Sources */,
+				363ED6661C353D6D006D2F34 /* YoutubeController.swift in Sources */,
 				36EB27A01C3178CB0022AE16 /* WatchedFilmController.swift in Sources */,
 				36FF47AE1C21D02400A7E27A /* FilmTableViewCell.swift in Sources */,
 				36FF47A81C21B14400A7E27A /* ManagedFilm.swift in Sources */,
 				36EB279E1C31405A0022AE16 /* AllFilmsTableViewCell.swift in Sources */,
 				36DDD4531C30714300E4A353 /* ImageCache.swift in Sources */,
+				363ED6631C353CE2006D2F34 /* YTPlayerView.m in Sources */,
 				36747F451C21DCF80099AB2C /* FilmController.swift in Sources */,
 				36D276B51C172B19008E6642 /* ListController.swift in Sources */,
 				36B4FBAE1C2EA8E0007F1A3F /* TMDBApiClient.swift in Sources */,
@@ -338,6 +354,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = IOSProject/Info.plist;
@@ -345,6 +362,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gmessiaen.IOSProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "IOSProject/IOSProject-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -352,6 +371,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = IOSProject/Info.plist;
@@ -359,6 +379,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = gmessiaen.IOSProject;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "IOSProject/IOSProject-Bridging-Header.h";
 			};
 			name = Release;
 		};

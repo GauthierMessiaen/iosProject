@@ -1,8 +1,6 @@
 import UIKit
 import CoreData
 
-//whats the search?
-//addFilmContr
 class ListController: UITableViewController {
     @IBOutlet weak var table: UITableView!
     
@@ -61,7 +59,6 @@ class ListController: UITableViewController {
                 destinationVC.watchListController = self
             }
         }
-
     }
     
     func movieAlreadyInList(film: Film) -> Bool {

@@ -14,6 +14,10 @@ class TMDBApiClient {
         self.call("/\(type)/movie", method: "GET", type: type, data: data, success: success)
     }
     
+    func getTrailers(movieId: Int, success: (NSData -> Void)? = nil) {
+        self.call("/movie/\(movieId)/videos?external_source=imdb_id", method: "GET", type: "trailers", data: ["query": ""], success: success)
+    }
+    
     func call(request: String, method: String, type: String, data: [String : AnyObject]?, success: (NSData -> Void)?) {
         var url = self.BASE_URL + request
         
@@ -26,6 +30,8 @@ class TMDBApiClient {
             } else {
                 url = "\(url)?api_key=\(self.API_KEY)"
             }
+        } else if type == "trailers"{
+            url = "\(url)&api_key=\(self.API_KEY)"
         } else {
             url = "\(url)?api_key=\(self.API_KEY)"
         }

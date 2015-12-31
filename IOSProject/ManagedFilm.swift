@@ -2,7 +2,6 @@ import Foundation
 import CoreData
 import UIKit
 
-// not sure is the best way to do it but i think is good :)
 class ManagedFilm: NSManagedObject {
     @NSManaged var tmdbID: Int
     @NSManaged var title: String
@@ -10,6 +9,7 @@ class ManagedFilm: NSManagedObject {
     @NSManaged var score: Float
     @NSManaged var userScore: Float
     @NSManaged var imageUrl: String?
+    @NSManaged var trailer: String?
     
     
     convenience init(film: Film){
@@ -23,6 +23,7 @@ class ManagedFilm: NSManagedObject {
         score = film.score
         userScore = film.userScore
         imageUrl = film.imageUrl
+        trailer = film.trailer
         
         do{
             try managedContext.save()

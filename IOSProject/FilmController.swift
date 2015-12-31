@@ -12,6 +12,7 @@ class FilmController: UIViewController {
     @IBOutlet weak var score3ImageView: UIImageView!
     @IBOutlet weak var score4ImageView: UIImageView!
     @IBOutlet weak var score5ImageView: UIImageView!
+    @IBOutlet weak var playerView: YTPlayerView!
     
     var film: Film!
     var watchListController: ListController!
@@ -22,6 +23,11 @@ class FilmController: UIViewController {
         stars(film.score)
         descriptionLabel.text = film.overview
         filmImageView.setImages(film.imageUrl, defaultImg: nil)
+        print(film.trailer)
+        if let trailerId = film.trailer {
+            print(trailerId)
+            playerView.loadWithVideoId(trailerId)
+        }
     }
     
     @IBAction func addToList() {
@@ -39,12 +45,10 @@ class FilmController: UIViewController {
         }
     }
     
-    
-    
     func stars(score: Float) {
         let starScore = round(score / 2)
-        let star = UIImage(named: "star")
-        let star1 = UIImage(named: "star1")
+        let star = UIImage(named: "Star")
+        let star1 = UIImage(named: "Star1")
         switch starScore {
         case 1:
             score1ImageView.image = star1

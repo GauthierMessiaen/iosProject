@@ -17,6 +17,7 @@ class WatchedFilmController: UIViewController {
     @IBOutlet weak var score3ImageView: UIImageView!
     @IBOutlet weak var score4ImageView: UIImageView!
     @IBOutlet weak var score5ImageView: UIImageView!
+    @IBOutlet weak var playerView: YTPlayerView!
     
     var film: ManagedFilm!
     var parent: ListController!
@@ -30,6 +31,9 @@ class WatchedFilmController: UIViewController {
         descriptionLabel.text = film.overview
         filmImageView.setImages(film.imageUrl, defaultImg: nil)
         setScore(film.userScore)
+        if let trailerId = film.trailer {
+            playerView.loadWithVideoId(trailerId)
+        }
     }
     
     @IBAction func remove() {
@@ -44,7 +48,6 @@ class WatchedFilmController: UIViewController {
         self.parent.reload()
         self.navigationController?.popViewControllerAnimated(true)
     }
-    
     
     @IBAction func score1(sender: AnyObject) {
         setScore(1)
@@ -64,8 +67,8 @@ class WatchedFilmController: UIViewController {
     
     func setScore(score: Float) {
         film.userScore = score
-        let star = UIImage(named: "star")
-        let star1 = UIImage(named: "star1")
+        let star = UIImage(named: "Star")
+        let star1 = UIImage(named: "Star1")
         
         switch score {
         case 1:
@@ -105,7 +108,6 @@ class WatchedFilmController: UIViewController {
             btnScore4.setBackgroundImage(star, forState: .Normal)
             btnScore5.setBackgroundImage(star, forState: .Normal)
         }
-        print (film.userScore)
         saveFilm()
     }
     
