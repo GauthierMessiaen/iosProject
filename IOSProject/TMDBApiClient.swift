@@ -30,8 +30,6 @@ class TMDBApiClient {
             url = "\(url)?api_key=\(self.API_KEY)"
         }
         
-        print(url)
-        
         let request: NSMutableURLRequest = NSMutableURLRequest()
         request.URL = NSURL(string: url)
         request.HTTPMethod = method

@@ -1,16 +1,16 @@
 import Foundation
 import UIKit
+import CoreData
 
-class addFilmController: UITableViewController, UISearchResultsUpdating {
+class AddFilmController: UITableViewController, UISearchResultsUpdating {
     @IBOutlet weak var table: UITableView!
     
     var completeList : [Film] = []
     var filteredData : [Film] = []
     var searchActive = false
     var searchController = UISearchController(searchResultsController: nil)
-    
-    
-    
+    var watchListController: ListController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         searchController.searchResultsUpdater = self
@@ -30,7 +30,12 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
                 var movies: [Film] = []
                 
                 for movie in results{
-                    movies.append(Film(json: movie as! NSDictionary))
+                    let film = Film(json: movie as! NSDictionary)
+                    //if movie is in watchlist, don't show it again
+                    if !watchListController.movieAlreadyInList(film) {
+                        movies.append(film)
+                    }
+                    
                 }
                 dispatch_async(dispatch_get_main_queue(), {
                     if self.searchController.active && self.searchController.searchBar.text != "" {
@@ -71,7 +76,7 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
         film = completeList[indexPath.row]
         }
         cell.titleLabel?.text = film.title
-        cell.descriptionLabel?.text = film.description
+        cell.descriptionLabel?.text = film.overview
         cell.filmImageView.setImages(film.imageUrl, defaultImg: nil)
         
         return cell
@@ -84,12 +89,14 @@ class addFilmController: UITableViewController, UISearchResultsUpdating {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "showDetailsSegue") {
-            if let destinationVC = segue.destinationViewController as? filmController {
-                destinationVC.film = completeList[(self.tableView.indexPathForSelectedRow?.row)!]
+            if let destinationVC = segue.destinationViewController as? FilmController {
+                destinationVC.watchListController = self.watchListController
+                if searchController.active && searchController.searchBar.text != "" {
+                    destinationVC.film = filteredData[(self.tableView.indexPathForSelectedRow?.row)!]
+                } else {
+                    destinationVC.film = completeList[(self.tableView.indexPathForSelectedRow?.row)!]
+                }
             }
         }
     }
-    
-    
-    
 }
