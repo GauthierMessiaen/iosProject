@@ -1,13 +1,25 @@
 import UIKit
 import CoreData
 
-class ListController: UITableViewController {
+class ListController: UITableViewController, UISearchResultsUpdating {
     @IBOutlet weak var table: UITableView!
     
+    var searchController = UISearchController(searchResultsController: nil)
     var watchlist: [ManagedFilm] = []
+    var filteredList : [ManagedFilm] = []
+    var searchActive = false
     
     override func viewWillAppear(animated: Bool) {
         self.reload()
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        searchController.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = searchController.searchBar
     }
         
     func reload(){
@@ -27,18 +39,26 @@ class ListController: UITableViewController {
         return 1
     }
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return watchlist.count
+        if searchController.active && searchController.searchBar.text != "" {
+            return filteredList.count
+        } else {
+            return watchlist.count
+        }
     }
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 120
     }
     
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("filmCell", forIndexPath: indexPath) as! FilmTableViewCell
-        let film = watchlist[indexPath.row]
+        var film: ManagedFilm
         
+        if searchController.active && searchController.searchBar.text != "" {
+            film = filteredList[indexPath.row]
+        } else {
+            film = watchlist[indexPath.row]
+        }
         cell.titleLabel?.text = film.title
         cell.descriptionLabel?.text = film.overview
         cell.filmImageView.setImages(film.imageUrl, defaultImg: nil)
@@ -71,4 +91,10 @@ class ListController: UITableViewController {
         return false
     }
     
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        filteredList = watchlist.filter { film in
+            return film.title.lowercaseString.containsString(searchController.searchBar.text!.lowercaseString)
+        }
+        tableView.reloadData()
+    }
 }
