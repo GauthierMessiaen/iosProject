@@ -1,4 +1,4 @@
-//Source: Kennis
+//Source: Vincent Iserentant (een kennis van mij)
 import Foundation
 
 extension Dictionary {
