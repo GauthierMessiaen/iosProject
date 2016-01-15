@@ -1,6 +1,6 @@
 import UIKit
 
-class WatchedFilmController: UIViewController {
+class WatchedFilmController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var filmImageView: URLUIImageView!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -18,6 +18,10 @@ class WatchedFilmController: UIViewController {
     @IBOutlet weak var score4ImageView: UIImageView!
     @IBOutlet weak var score5ImageView: UIImageView!
     @IBOutlet weak var playerView: YTPlayerView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
+    
     
     var film: ManagedFilm!
     var parent: ListController!
@@ -33,6 +37,13 @@ class WatchedFilmController: UIViewController {
         setScore(film.userScore)
         if let trailerId = film.trailer {
             playerView.loadWithVideoId(trailerId)
+            
+            descriptionLabel.sizeToFit()
+            let size  = descriptionLabel.frame.height
+            print( size)
+            if size > 41 {
+                self.contentHeightConstraint.constant = self.contentHeightConstraint.constant + size
+            }
         }
     }
     
@@ -70,43 +81,26 @@ class WatchedFilmController: UIViewController {
         let star = UIImage(named: "Star")
         let star1 = UIImage(named: "Star1")
         
-        switch score {
-        case 1:
+        btnScore1.setBackgroundImage(star, forState: .Normal)
+        btnScore2.setBackgroundImage(star, forState: .Normal)
+        btnScore3.setBackgroundImage(star, forState: .Normal)
+        btnScore4.setBackgroundImage(star, forState: .Normal)
+        btnScore5.setBackgroundImage(star, forState: .Normal)
+        
+        if score >= 1 {
             btnScore1.setBackgroundImage(star1, forState: .Normal)
-            btnScore2.setBackgroundImage(star, forState: .Normal)
-            btnScore3.setBackgroundImage(star, forState: .Normal)
-            btnScore4.setBackgroundImage(star, forState: .Normal)
-            btnScore5.setBackgroundImage(star, forState: .Normal)
-        case 2:
-            btnScore1.setBackgroundImage(star1, forState: .Normal)
+        }
+        if score >= 2 {
             btnScore2.setBackgroundImage(star1, forState: .Normal)
-            btnScore3.setBackgroundImage(star, forState: .Normal)
-            btnScore4.setBackgroundImage(star, forState: .Normal)
-            btnScore5.setBackgroundImage(star, forState: .Normal)
-        case 3:
-            btnScore1.setBackgroundImage(star1, forState: .Normal)
-            btnScore2.setBackgroundImage(star1, forState: .Normal)
+        }
+        if score >= 3 {
             btnScore3.setBackgroundImage(star1, forState: .Normal)
-            btnScore4.setBackgroundImage(star, forState: .Normal)
-            btnScore5.setBackgroundImage(star, forState: .Normal)
-        case 4:
-            btnScore1.setBackgroundImage(star1, forState: .Normal)
-            btnScore2.setBackgroundImage(star1, forState: .Normal)
-            btnScore3.setBackgroundImage(star1, forState: .Normal)
+        }
+        if score >= 4 {
             btnScore4.setBackgroundImage(star1, forState: .Normal)
-            btnScore5.setBackgroundImage(star, forState: .Normal)
-        case 5:
-            btnScore1.setBackgroundImage(star1, forState: .Normal)
-            btnScore2.setBackgroundImage(star1, forState: .Normal)
-            btnScore3.setBackgroundImage(star1, forState: .Normal)
-            btnScore4.setBackgroundImage(star1, forState: .Normal)
+        }
+        if score >= 5 {
             btnScore5.setBackgroundImage(star1, forState: .Normal)
-        default:
-            btnScore1.setBackgroundImage(star, forState: .Normal)
-            btnScore2.setBackgroundImage(star, forState: .Normal)
-            btnScore3.setBackgroundImage(star, forState: .Normal)
-            btnScore4.setBackgroundImage(star, forState: .Normal)
-            btnScore5.setBackgroundImage(star, forState: .Normal)
         }
         saveFilm()
     }
@@ -117,52 +111,34 @@ class WatchedFilmController: UIViewController {
         
         do{
             try context.save()
-        }catch _ as NSError{
-            //TODO smth :p
-        }
+        }catch _ as NSError{ }
     }
     
     func stars(score: Float) {
         let starScore = round(score / 2)
-        let star = UIImage(named: "star")
-        let star1 = UIImage(named: "star1")
-        switch starScore {
-        case 1:
+        let star = UIImage(named: "Star")
+        let star1 = UIImage(named: "Star1")
+        
+        score1ImageView.image = star
+        score2ImageView.image = star
+        score3ImageView.image = star
+        score4ImageView.image = star
+        score5ImageView.image = star
+        
+        if starScore >= 1 {
             score1ImageView.image = star1
-            score2ImageView.image = star
-            score3ImageView.image = star
-            score4ImageView.image = star
-            score5ImageView.image = star
-        case 2:
-            score1ImageView.image = star1
+        }
+        if starScore >= 2 {
             score2ImageView.image = star1
-            score3ImageView.image = star
-            score4ImageView.image = star
-            score5ImageView.image = star
-        case 3:
-            score1ImageView.image = star1
-            score2ImageView.image = star1
+        }
+        if starScore >= 3 {
             score3ImageView.image = star1
-            score4ImageView.image = star
-            score5ImageView.image = star
-        case 4:
-            score1ImageView.image = star1
-            score2ImageView.image = star1
-            score3ImageView.image = star1
+        }
+        if starScore >= 4 {
             score4ImageView.image = star1
-            score5ImageView.image = star
-        case 5:
-            score1ImageView.image = star1
-            score2ImageView.image = star1
-            score3ImageView.image = star1
-            score4ImageView.image = star1
+        }
+        if starScore >= 5 {
             score5ImageView.image = star1
-        default:
-            score1ImageView.image = star
-            score2ImageView.image = star
-            score3ImageView.image = star
-            score4ImageView.image = star
-            score5ImageView.image = star
         }
     }
 }

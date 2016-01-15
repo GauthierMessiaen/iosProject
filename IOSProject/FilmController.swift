@@ -13,20 +13,27 @@ class FilmController: UIViewController {
     @IBOutlet weak var score4ImageView: UIImageView!
     @IBOutlet weak var score5ImageView: UIImageView!
     @IBOutlet weak var playerView: YTPlayerView!
+    @IBOutlet weak var contentHeightConstraint: NSLayoutConstraint!
     
     var film: Film!
     var watchListController: ListController!
     
+    @IBOutlet weak var contentView: UIView!
     override func viewDidLoad() {
         title = film.title
         titleLabel.text = film.title
         stars(film.score)
         descriptionLabel.text = film.overview
         filmImageView.setImages(film.imageUrl, defaultImg: nil)
-        print(film.trailer)
         if let trailerId = film.trailer {
-            print(trailerId)
             playerView.loadWithVideoId(trailerId)
+            
+            descriptionLabel.sizeToFit()
+            let size  = descriptionLabel.frame.height
+            print( size)
+            if size > 41 {
+                self.contentHeightConstraint.constant = self.contentHeightConstraint.constant + size
+            }
         }
     }
     
@@ -49,43 +56,27 @@ class FilmController: UIViewController {
         let starScore = round(score / 2)
         let star = UIImage(named: "Star")
         let star1 = UIImage(named: "Star1")
-        switch starScore {
-        case 1:
+        
+        score1ImageView.image = star
+        score2ImageView.image = star
+        score3ImageView.image = star
+        score4ImageView.image = star
+        score5ImageView.image = star
+        
+        if starScore >= 1 {
             score1ImageView.image = star1
-            score2ImageView.image = star
-            score3ImageView.image = star
-            score4ImageView.image = star
-            score5ImageView.image = star
-        case 2:
-            score1ImageView.image = star1
+        }
+        if starScore >= 2 {
             score2ImageView.image = star1
-            score3ImageView.image = star
-            score4ImageView.image = star
-            score5ImageView.image = star
-        case 3:
-            score1ImageView.image = star1
-            score2ImageView.image = star1
+        }
+        if starScore >= 3 {
             score3ImageView.image = star1
-            score4ImageView.image = star
-            score5ImageView.image = star
-        case 4:
-            score1ImageView.image = star1
-            score2ImageView.image = star1
-            score3ImageView.image = star1
+        }
+        if starScore >= 4 {
             score4ImageView.image = star1
-            score5ImageView.image = star
-        case 5:
-            score1ImageView.image = star1
-            score2ImageView.image = star1
-            score3ImageView.image = star1
-            score4ImageView.image = star1
+        }
+        if starScore >= 5 {
             score5ImageView.image = star1
-        default:
-            score1ImageView.image = star
-            score2ImageView.image = star
-            score3ImageView.image = star
-            score4ImageView.image = star
-            score5ImageView.image = star
         }
     }
 }

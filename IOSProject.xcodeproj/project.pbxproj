@@ -139,6 +139,7 @@
 		36C303BD1C1332F70002D4B0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				36B4FBAD1C2EA8E0007F1A3F /* TMDBApiClient.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -147,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				36FF47A71C21B14400A7E27A /* ManagedFilm.swift */,
-				36B4FBAD1C2EA8E0007F1A3F /* TMDBApiClient.swift */,
 				36B010B01C342B780067382B /* Film.swift */,
 			);
 			name = Models;
