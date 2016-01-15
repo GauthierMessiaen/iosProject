@@ -1,6 +1,6 @@
 # iosProject
 Dit is mijn project voor IOS.
-Met deze app kan je een watchlist voor films maken, waarmee je een aantal zaken kan doen:
+Met deze app kan je een watchlist voor films maken waarmee je een aantal zaken kan doen:
   - films opzoeken en details bekijken
     - titel, beschrijving, score, poster, trailer
   - films toevoegen en verwijderen van je persoonlijke watchlist
