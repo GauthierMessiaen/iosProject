@@ -30,7 +30,6 @@ class FilmController: UIViewController {
             
             descriptionLabel.sizeToFit()
             let size  = descriptionLabel.frame.height
-            print( size)
             if size > 41 {
                 self.contentHeightConstraint.constant = self.contentHeightConstraint.constant + size
             }

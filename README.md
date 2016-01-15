@@ -12,3 +12,4 @@ Tijdens het maken van deze app heb ik gebruik gemaakt van:
     - Youtube API: https://developers.google.com/youtube/
   - Core Data
   - UITableViews met custom cellen en een zoekbar
+  - UIScrollView voor als niet alles op het detailscherm past

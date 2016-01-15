@@ -7,11 +7,6 @@ class ListController: UITableViewController, UISearchResultsUpdating {
     var searchController = UISearchController(searchResultsController: nil)
     var watchlist: [ManagedFilm] = []
     var filteredList : [ManagedFilm] = []
-    var searchActive = false
-    
-    override func viewWillAppear(animated: Bool) {
-        self.reload()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +15,8 @@ class ListController: UITableViewController, UISearchResultsUpdating {
         definesPresentationContext = true
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
+        
+        self.reload()
     }
         
     func reload(){

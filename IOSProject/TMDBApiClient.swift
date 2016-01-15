@@ -5,9 +5,6 @@ class TMDBApiClient {
     private let API_KEY = "860d7a52308bfdd68825f10b030d9430";
     
     static let instance = TMDBApiClient()
-    private init() {
-        
-    }
     
     func searchMovie(query : String = "",type: String, success: (NSData -> Void)? = nil) {
         let data = ["query": query]
@@ -40,8 +37,7 @@ class TMDBApiClient {
         request.URL = NSURL(string: url)
         request.HTTPMethod = method
         
-        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { 
-            response, data, error in
+        NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue()) { response, data, error in
             if data == nil {
                 print("data = nil")
                 return
@@ -49,9 +45,9 @@ class TMDBApiClient {
             
             if let httpResponse = response as? NSHTTPURLResponse {
                 let statusCode = httpResponse.statusCode
-                
+            
                 if statusCode != 200 {
-                    print("error -> status not 200")
+                    print("error -> status not 200, status: \(statusCode)")
                 } else {
                     if success != nil{
                         success!(data!)

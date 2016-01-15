@@ -7,7 +7,6 @@ class AddFilmController: UITableViewController, UISearchResultsUpdating {
     
     var completeList : [Film] = []
     var filteredData : [Film] = []
-    //var searchActive = false
     var searchController = UISearchController(searchResultsController: nil)
     var watchListController: ListController!
 
